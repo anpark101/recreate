@@ -5,4 +5,5 @@ android/local.properties
 *.jks
 *.keystore
 *.apk
+deliverables/
 .DS_Store
