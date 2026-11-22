@@ -25,6 +25,17 @@ This project is not affiliated with the website creator.
   iframe. Nevertheless, site-specific browser features and Cloudflare policies
   must be checked on a real device before calling it fully compatible.
 
+## Verified build
+
+- Version: **1.0.0**, Android **8.0+**, online-only, debug-signed test APK.
+- Successful build: <https://github.com/anpark101/recreate/actions/runs/45041656443>
+- Built source: `292d4b77c3e1faab9f7f2dc52a6d76997bda6610`.
+- File: `Superyau-1.0.0.apk` (18,648 bytes).
+- SHA256: `1f0203a95a891c3adaaaa78a31a551a116121c55cd1e9942c734063774758af2`.
+- Android SDK `apksigner` verified the APK Signature Scheme v2 signature.
+- API-transferred bytes match that SHA256; ZIP integrity and required APK entries
+  were checked locally. This is build/integrity verification, not device testing.
+
 ## Android: create and download the APK
 
 The **Build Android APK** GitHub Actions workflow runs automatically when
