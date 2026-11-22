@@ -5,6 +5,7 @@ on:
     paths:
       - 'android/**'
       - '.github/workflows/android.yml'
+      - 'scripts/apk-transfer.py'
 permissions:
   contents: read
 jobs:
@@ -54,18 +55,19 @@ jobs:
           # For this small, public test APK, annotations provide an API-only fallback.
           # No signing keys or other private files are included.
           python3 - <<'PY'
-          import base64, hashlib, os
+          import hashlib, os
           from pathlib import Path
           apk = Path('android/app/build/outputs/apk/debug/app-debug.apk').read_bytes()
           print('::notice title=APK SHA256::' + hashlib.sha256(apk).hexdigest())
           report = Path(os.environ['RUNNER_TEMP'], 'apk-verification.txt').read_text()
           print('::notice title=APK signature verification::' + report.replace('%', '%25').replace('\n', '%0A'))
-          encoded = base64.b64encode(apk).decode('ascii')
-          chunks = [encoded[i:i+60000] for i in range(0, len(encoded), 60000)]
-          if len(chunks) <= 8:
-              for i, chunk in enumerate(chunks, 1):
-                  print(f'::notice title=APK transfer {i:03d} of {len(chunks):03d}::{chunk}')
           PY
+      - name: API transfer batch 1
+        run: python3 scripts/apk-transfer.py 0
+      - name: API transfer batch 2
+        run: python3 scripts/apk-transfer.py 1
+      - name: API transfer batch 3
+        run: python3 scripts/apk-transfer.py 2
       - uses: actions/upload-artifact@v4
         with:
           name: Superyau-Android-APK

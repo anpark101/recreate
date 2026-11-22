@@ -10,9 +10,10 @@ This project is not affiliated with the website creator.
 ## Current status — important
 
 - Android source and a GitHub Actions APK-build workflow are provided.
-- **No APK has been compiled or device-tested in this workspace.** There is no
-  Android SDK/JDK installed here, and outbound access prevents downloading the
-  Android toolchain or connecting directly to the original website.
+- **The APK has been built successfully on GitHub Actions**, with its APK
+  signature verified using Android SDK `apksigner`. Device testing of the remote
+  website is still required. Local Android SDK/JDK installation is unavailable,
+  so this project uses GitHub-hosted runners for compilation.
 - The web launcher, manifest, icons, service worker, and local server pass the
   included local tests. Those are configuration/server checks, **not** end-to-end
   tests of the remote website.
@@ -26,8 +27,8 @@ This project is not affiliated with the website creator.
 
 ## Android: create and download the APK
 
-When these changes are pushed to the current branch, the **Build Android APK**
-GitHub Actions workflow runs automatically for Android-related changes. No
+The **Build Android APK** GitHub Actions workflow runs automatically when
+Android-related changes are pushed to the current branch. No
 secrets, paid service, or developer account are needed for this test build.
 
 1. On GitHub, open this repository → **Actions → Build Android APK**.
@@ -38,14 +39,21 @@ secrets, paid service, or developer account are needed for this test build.
 5. Open **Superyau** from your home screen.
 
 The workflow can also be run manually once GitHub recognizes it as a workflow
-on the default branch. Nothing in this workspace has been pushed or deployed
-as part of creating these files.
+on the default branch. The source has been pushed to the current working branch
+to run this build; it has not been merged into the default branch.
 
 This is a **debug-signed, sideloadable test APK**, not a Play Store release.
 GitHub's fresh runners may generate a different debug signing key on each run;
 updates may require uninstalling the previous build, which removes its local
 settings. For ongoing distribution, configure a persistent release signing key
 in GitHub secrets; never commit a signing key.
+
+Each build verifies the APK signature and emits its SHA256 in the build
+annotations. The normal Actions artifact is the primary download. For restricted
+clients unable to reach GitHub's Azure artifact host, small APKs also have a
+bounded, base64 transfer fallback in API-accessible build annotations. Only the
+public APK bytes are transferred, never signing keys. Reassembled bytes must
+match the emitted SHA256 before use. Generated deliverables are Git-ignored.
 
 ### Build on a development computer
 
