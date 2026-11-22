@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="application-name" content="Superyau">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <title>Superyau</title>
+  <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff}iframe{display:block;border:0;width:100%;height:100%;height:100dvh}#offline{position:fixed;inset:0;place-content:center;text-align:center;background:#fafafa;color:#222;font:16px system-ui;padding:24px}#offline:not([hidden]){display:grid}button,a{font:inherit;color:inherit}button{padding:12px 24px;border:1px solid #ccc;border-radius:12px;background:white;cursor:pointer}a{display:block;margin-top:24px}</style>
+</head>
+<body>
+  <iframe id="website" title="Superyau — Chat Mockup Maker" src="https://superyau.iryonmann.workers.dev/" allow="clipboard-read; clipboard-write; fullscreen; web-share" allowfullscreen></iframe>
+  <section id="offline" hidden><div><h1>You’re offline</h1><p>Superyau needs an internet connection.</p><button id="retry" type="button">Try again</button><a href="./install.html">Launcher help</a></div></section>
+  <script src="./app.js"></script>
+</body>
+</html>

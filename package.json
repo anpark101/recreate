@@ -1,0 +1,11 @@
+{
+  "name": "superyau-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Online Android wrapper and installable web launcher for Superyau",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test scripts/test.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
